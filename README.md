@@ -22,6 +22,14 @@ If you replace 'UC' with 'UU' in the channel's id you have the channel's upload 
 - Turn the web application into a browser add-on
 - Find the current played game
 
+## How to
+
+- Rename config.template to config.js
+- Fill in your api key (Youtube Data API) in config.js
+- Enter the channel ids of the channels you want to follow in config.js
+- Serve the src folder using your favorite hosting tool
+
+
 ## Screenshot
 
 ![youtube-live screenshot](img/ytlive.png)
