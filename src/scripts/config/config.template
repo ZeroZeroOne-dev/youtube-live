@@ -1,0 +1,7 @@
+export const CONFIG = {
+    YT_KEY: 'key here, between single quotes',
+    CHANNELS: [
+        'UCXBE_QQSZueB8082ml5fslg', // TimTheTatman
+        'UCcJL2ld6kxy_nuV1u7PVQ0g', // DrDisRespect 
+    ]
+};
