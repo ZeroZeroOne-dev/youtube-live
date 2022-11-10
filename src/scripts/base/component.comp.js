@@ -36,6 +36,18 @@ export class Component extends HTMLElement {
         this.shadow.appendChild(child);
     }
 
+    replaceChild(current, newChild) {
+        this.shadow.replaceChild(current, newChild);
+    }
+
+    replaceChildren(newChildren = []) {
+        this.shadow.replaceChildren(newChildren);
+    }
+
+    removeChildren(){
+        this.replaceChildren();
+    }
+
     get innerHTML() {
         return this.shadow.innerHTML;
     }

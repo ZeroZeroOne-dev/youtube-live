@@ -6,15 +6,17 @@ export class LiveListComponent extends Component {
     constructor() {
         super();
 
-        this.draw();
+        YoutubeService.subscribe(s => this.draw(s));
     }
 
-    async draw() {
-        const streams = await YoutubeService.getLiveVideos();
+    async draw(streams) {
+        this.removeChildren();
 
         streams.forEach(stream => {
-            this.appendChild(new LiveComponent(stream));
-            this.appendChild(document.createElement('hr'));
+            this.appendChild(
+                new LiveComponent(stream),
+                document.createElement('hr')
+            );
         });
     }
 }

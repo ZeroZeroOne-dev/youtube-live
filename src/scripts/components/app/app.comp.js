@@ -1,5 +1,5 @@
 import { Component } from "../../base/component.comp.js";
-import { YoutubeService } from "../../services/youtube.service.js";
+import { InitService } from "../../services/init.service.js";
 import { LiveListComponent } from "../live-list/live-list.comp.js";
 
 export class AppComponent extends Component {
@@ -10,11 +10,12 @@ export class AppComponent extends Component {
     }
 
     async init(){
-        await YoutubeService.init();
-        await this.draw();
+        await InitService.init();
+
+        this.draw();
     }
 
-    async draw() {
+    draw() {
         this.innerHTML = `
             <h1>Youtube Live</h1>
             <hr/>

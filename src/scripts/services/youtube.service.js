@@ -2,9 +2,11 @@ import { CONFIG } from "../config/config.js";
 
 export class YoutubeService {
     static #CLIENT;
+    static #CALLBACKS = [];
+    static #STREAMS = [];
 
-    static init() {
-        return new Promise((resolve, reject) => {
+    static async init() {
+        await new Promise((resolve, reject) => {
             gapi.load('client', async () => {
                 try {
                     await gapi.client.init({
@@ -20,14 +22,25 @@ export class YoutubeService {
                 }
             });
         });
+
+        setInterval(async () => {
+            await this.refresh();
+        }, 1000 * 60 * 10);
+        await this.refresh();
     }
 
-    static async getLiveVideos() {
-        const playlists = this.getUploadsPlaylistIds();
+    static async refresh(){
+        const streams = await this.#getLiveVideos();
+        this.#STREAMS = streams;
+        this.#CALLBACKS.forEach(c => c(streams));
+    }
 
-        const getVideoIds = playlists.map(p => this.getLastPlaylistVideoId(p));
+    static async #getLiveVideos() {
+        const playlists = this.#getUploadsPlaylistIds();
+
+        const getVideoIds = playlists.map(p => this.#getLastPlaylistVideoId(p));
         const videoIds = await Promise.all(getVideoIds);
-        const videos = await this.getVideos(videoIds);
+        const videos = await this.#getVideos(videoIds);
 
         return videos
             .filter(v => v.snippet.liveBroadcastContent == 'live')
@@ -40,11 +53,11 @@ export class YoutubeService {
             }));
     }
 
-    static getUploadsPlaylistIds() {
+    static #getUploadsPlaylistIds() {
         return CONFIG.CHANNELS.map(ci => ci.replace('UC', 'UU'));
     }
 
-    static async getLastPlaylistVideoId(playlistId) {
+    static async #getLastPlaylistVideoId(playlistId) {
         const listResponse = await this.#CLIENT.playlistItems.list({
             part: [
                 'contentDetails'
@@ -58,7 +71,7 @@ export class YoutubeService {
         return listResponse.result.items[0].contentDetails.videoId;
     }
 
-    static async getVideos(videoIds) {
+    static async #getVideos(videoIds) {
         const videosResponse = await this.#CLIENT.videos.list({
             part: [
                 'snippet,liveStreamingDetails'
@@ -70,5 +83,10 @@ export class YoutubeService {
         });
 
         return videosResponse.result.items;
+    }
+
+    static subscribe(callback) {
+        this.#CALLBACKS.push(callback);
+        callback(this.#STREAMS);
     }
 }
