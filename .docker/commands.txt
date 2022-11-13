@@ -1,4 +1,4 @@
 from root: 
 
 docker build . -t yt-live.zerozeroone.dev -f .docker/Dockerfile 
-docker run -d --name yt-live.zerozeroone.dev -p 8081:80 yt-live.zerozeroone.dev
+docker run -d --name yt-live.zerozeroone.dev -p 8082:80 yt-live.zerozeroone.dev
