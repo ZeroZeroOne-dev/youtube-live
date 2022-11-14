@@ -1,9 +1,11 @@
-import { Component } from "../../base/component.comp.js";
+import { Component } from "../../../001-lib/component/component.comp.js";
 import { printDuration } from "../../utils/duration-print.util.js";
 
 export class LiveComponent extends Component {
     constructor(stream) {
-        super('scripts/components/live/live.comp.css');
+        super({
+            styleSheet: 'scripts/components/live/live.comp.css'
+        });
 
         this.stream = stream;
 
@@ -11,12 +13,10 @@ export class LiveComponent extends Component {
     }
 
     draw() {
-        this.innerHTML = `
-            <div>
+        this.container.innerHTML = `
+            <div class="bg-comp clickable">
                 <h2>
-                    <a href="https://youtube.com/watch?v=${this.stream.id}" target="_blank">
-                        ${this.stream.channel}
-                    </a>
+                    ${this.stream.channel}
                 </h2>
                 <div class='subtitle'>
                     <h3 class='left'>${this.stream.title}</h3>
@@ -24,6 +24,12 @@ export class LiveComponent extends Component {
                 </div>
             </div>
         `;
+
+        this.container.addEventListener('click', () => this.openStream());
+    }
+
+    openStream() {
+        window.open(`https://youtube.com/watch?v=${this.stream.id}`, '_blank');
     }
 }
 customElements.define('ytl-live', LiveComponent);

@@ -1,4 +1,4 @@
-import { Component } from "../../base/component.comp.js";
+import { Component } from "../../../001-lib/component/component.comp.js";
 import { YoutubeService } from "../../services/youtube.service.js";
 import { LiveComponent } from "../live/live.comp.js";
 
@@ -10,10 +10,10 @@ export class LiveListComponent extends Component {
     }
 
     async draw(streams) {
-        this.removeChildren();
+        this.container.replaceChildren();
 
         streams.forEach(stream => {
-            this.appendChild(
+            this.container.appendChild(
                 new LiveComponent(stream),
                 document.createElement('hr')
             );
