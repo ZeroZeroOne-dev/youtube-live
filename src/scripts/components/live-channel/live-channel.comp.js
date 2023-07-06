@@ -1,10 +1,10 @@
 import { Component } from "../../../001-lib/component/component.comp.js";
 import { printDuration } from "../../utils/duration-print.util.js";
 
-export class LiveComponent extends Component {
+export class LiveChannelComponent extends Component {
     constructor(stream) {
         super({
-            styleSheet: 'scripts/components/live/live.comp.css'
+            styleSheets: ['scripts/components/live-channel/live-channel.comp.css']
         });
 
         this.stream = stream;
@@ -32,4 +32,4 @@ export class LiveComponent extends Component {
         window.open(`https://youtube.com/watch?v=${this.stream.id}`, '_blank');
     }
 }
-customElements.define('ytl-live', LiveComponent);
+customElements.define('ytl-live', LiveChannelComponent);

@@ -2,7 +2,8 @@ import { Component } from "../../../001-lib/component/component.comp.js";
 import { RoutingComponent } from "../../../001-lib/routing/routing.comp.js";
 import { InitService } from "../../services/init.service.js";
 import { IntroComponent } from "../intro/intro.comp.js";
-import { LiveListComponent } from "../live-list/live-list.comp.js";
+import { LiveListPageComponent } from "../live-list-page/live-list-page.comp.js";
+import { SettingsPageComponent } from "../settings-page/settings-page.comp.js";
 
 export class AppComponent extends Component {
     constructor() {
@@ -12,7 +13,10 @@ export class AppComponent extends Component {
 
         RoutingComponent.setRouteMap({
             '#\/list': {
-                component: LiveListComponent
+                component: LiveListPageComponent
+            },
+            '#\/settings': {
+                component: SettingsPageComponent
             },
             '': {
                 redirect: '/list'

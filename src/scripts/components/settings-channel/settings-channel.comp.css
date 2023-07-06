@@ -1,0 +1,21 @@
+h2 {
+    margin: 0 0 10px 0;
+}
+
+h3 {
+    margin: 0;
+}
+
+.channel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subtitle {
+    margin-top: 10px;
+    font-style: italic;
+    font-size: small;
+    color: #737373;
+}

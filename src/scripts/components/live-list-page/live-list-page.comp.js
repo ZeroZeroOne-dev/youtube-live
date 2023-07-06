@@ -1,8 +1,8 @@
 import { Component } from "../../../001-lib/component/component.comp.js";
 import { YoutubeService } from "../../services/youtube.service.js";
-import { LiveComponent } from "../live/live.comp.js";
+import { LiveChannelComponent } from "../live-channel/live-channel.comp.js";
 
-export class LiveListComponent extends Component {
+export class LiveListPageComponent extends Component {
     constructor() {
         super();
 
@@ -14,10 +14,10 @@ export class LiveListComponent extends Component {
 
         streams.forEach(stream => {
             this.container.appendChild(
-                new LiveComponent(stream),
+                new LiveChannelComponent(stream),
                 document.createElement('hr')
             );
         });
     }
 }
-customElements.define('ytl-live-list', LiveListComponent);
+customElements.define('ytl-live-list-page', LiveListPageComponent);
