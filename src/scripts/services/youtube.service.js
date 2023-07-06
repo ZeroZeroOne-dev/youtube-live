@@ -39,6 +39,7 @@ export class YoutubeService {
 
     static async #getLiveVideos() {
         const playlists = this.#getUploadsPlaylistIds();
+        if(playlists.length === 0) return [];
 
         const getVideoIds = playlists.map((p) =>
             this.#getLastPlaylistVideoId(p)
