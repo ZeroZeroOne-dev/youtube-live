@@ -10,10 +10,10 @@ export class LiveListPageComponent extends Component {
     }
 
     async draw(streams) {
-        this.container.replaceChildren();
+        this.root.replaceChildren();
 
         streams.forEach(stream => {
-            this.container.appendChild(
+            this.root.appendChild(
                 new LiveChannelComponent(stream),
                 document.createElement('hr')
             );

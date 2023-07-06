@@ -13,7 +13,7 @@ export class LiveChannelComponent extends Component {
     }
 
     draw() {
-        this.container.innerHTML = `
+        this.root.innerHTML = `
             <div class="bg-comp clickable">
                 <h2>
                     ${this.stream.channel}
@@ -25,7 +25,7 @@ export class LiveChannelComponent extends Component {
             </div>
         `;
 
-        this.container.addEventListener('click', () => this.openStream());
+        this.root.addEventListener('click', () => this.openStream());
     }
 
     openStream() {
