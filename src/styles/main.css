@@ -1,0 +1,10 @@
+html {
+    font-size: 0.8rem;
+}
+
+
+@media screen and (min-resolution: 288dpi) {
+    html {
+        font-size: 1.4rem;
+    }
+}
