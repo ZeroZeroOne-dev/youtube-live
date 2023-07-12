@@ -12,11 +12,8 @@ export class SettingsChannelComponent extends Component {
     /** @param {() => void} deleteCallback */
     constructor(channel, deleteCallback) {
         super({
-            template: 'scripts/components/settings-channel/settings-channel.comp.html',
-            styleSheets: [
-                'styles/classes.css',
-                'scripts/components/settings-channel/settings-channel.comp.css'
-            ]
+            template: "scripts/components/settings-channel/settings-channel.comp.html",
+            styleSheets: ["styles/classes.css", "scripts/components/settings-channel/settings-channel.comp.css"],
         });
 
         this.#channel = channel;
@@ -24,9 +21,14 @@ export class SettingsChannelComponent extends Component {
     }
 
     init() {
-        this.getChild("#channel-name").innerText = this.#channel.handle;
-        this.getChild("#channel-id").innerText = this.#channel.id;
-        this.getChild(".remove-channel").addEventListener('click', this.#callback);
+        this.getChild(".channel-name").innerText = this.#channel.handle;
+        this.getChild(".channel-id").innerText = this.#channel.id;
+        this.getChild(".remove-channel").addEventListener("click", this.#callback);
+        this.getChild(".open-channel").addEventListener("click", () => this.#openChannel());
+    }
+
+    #openChannel() {
+        window.open(`https://youtube.com/${this.#channel.handle}`, "_blank");
     }
 }
 customElements.define("ytl-settings-channel", SettingsChannelComponent);

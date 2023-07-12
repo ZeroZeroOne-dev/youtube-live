@@ -19,3 +19,7 @@ h3 {
     font-size: small;
     color: #737373;
 }
+
+.open-channel {
+    flex-grow: 1;
+}

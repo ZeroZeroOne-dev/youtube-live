@@ -1,6 +1,22 @@
+.handle {
+    margin: 0 0 10px 0;
+}
+
 .add-channel {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+input {
+    font-family: inherit;
+    font-size: 200%;
+}
+
+.error {
+    margin-top: 10px;
+    color: red;
+    font-style: italic;
+    display: none;
 }

@@ -5,7 +5,7 @@ export class IntroComponent extends Component {
     constructor() {
         super({
             styleSheets: [
-                "styles/classes.css",
+                'styles/classes.css',
                 "scripts/components/intro/intro.comp.css",
             ],
             template: "scripts/components/intro/intro.comp.html",

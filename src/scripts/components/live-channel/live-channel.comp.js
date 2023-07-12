@@ -15,12 +15,12 @@ export class LiveChannelComponent extends Component {
     draw() {
         this.root.innerHTML = `
             <div class="bg-comp clickable">
-                <h2>
+                <h3>
                     ${this.stream.channel}
-                </h2>
+                </h3>
                 <div class='subtitle'>
-                    <h3 class='left'>${this.stream.title}</h3>
-                    <h3 class='right'>${printDuration(this.stream.start)} - ${this.stream.viewers}</h3>
+                    <span class='left'>${this.stream.title}</span>
+                    <span class='right'>${printDuration(this.stream.start)} - ${this.stream.viewers}</span>
                 </div>
             </div>
         `;

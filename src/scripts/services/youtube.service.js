@@ -1,5 +1,5 @@
 import { CONFIG } from "../config/config.js";
-import { DataService } from "./data.service.js";
+import { DataService, Channel } from "./data.service.js";
 
 export class YoutubeService {
     static #CLIENT;
@@ -39,7 +39,7 @@ export class YoutubeService {
 
     static async #getLiveVideos() {
         const playlists = this.#getUploadsPlaylistIds();
-        if(playlists.length === 0) return [];
+        if (playlists.length === 0) return [];
 
         const getVideoIds = playlists.map((p) =>
             this.#getLastPlaylistVideoId(p)
@@ -86,18 +86,37 @@ export class YoutubeService {
         return videosResponse.result.items;
     }
 
-    /** @param {string} handle */
+    /** @param {string} query */
+    /** @returns {Promise<Channel>} */
+    static async getChannelIdAndHandleForQuery(query) {
+        const id = await this.#getChannelIdForQuery(query);
+        const handle = await this.#getChannelHandleForId(id);
+        return { handle, id };
+    }
+
     /** @returns {Promise<string>} */
-    static async getChannelIdForHandle(handle) {
+    static async #getChannelIdForQuery(query) {
         const searchResponse = await this.#CLIENT.search.list({
             part: ["snippet"],
             fields: ["items(id)"],
             type: ["channel"],
             maxResults: 1,
-            q: handle,
+            q: query,
         });
 
         return searchResponse.result.items[0].id.channelId;
+    }
+
+    /** @returns {Promise<string>} */
+    static async #getChannelHandleForId(id) {
+        const channelResponse = await this.#CLIENT.channels.list({
+            part: ["snippet"],
+            maxResults: 1,
+            fields: "items(snippet(customUrl))",
+            id: [id],
+        });
+
+        return channelResponse.result.items[0].snippet.customUrl;
     }
 
     static subscribe(callback) {
